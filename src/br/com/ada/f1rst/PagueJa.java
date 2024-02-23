@@ -49,9 +49,8 @@ public class PagueJa {
                 default:
                     System.out.println("Opção inválida!");
             }
-
             if (sair) {
-                break; // Sai do loop do-while
+                break;
             }
         } while (true);
     }
@@ -95,7 +94,7 @@ public class PagueJa {
                     listarContasCliente(scanner, clientes);
                     break;
                 case 0:
-                    return true; // Retorna para o menu anterior (exibirMenu1)
+                    return true;
                 default:
                     System.out.println("Opção inválida!");
                     break;
@@ -188,14 +187,14 @@ public class PagueJa {
                         switch (opcaoTipoConta) {
                             case 1:
                                 Conta contaPoupanca = new Conta(c, TipoDeConta.POUPANCA, tipoDeCliente);
-                                c.adicionarConta(contaPoupanca); // Adiciona a conta ao cliente
+                                c.adicionarConta(contaPoupanca);
                                 contas.add(contaPoupanca);
                                 System.out.println("Conta Poupança criada com sucesso! O código da conta: " + contaPoupanca.getNumeroDaConta());
                                 System.out.println("");
                                 break;
                             case 2:
                                 Conta contaInvestimento = new Conta(c, TipoDeConta.INVESTIMENTO, tipoDeCliente);
-                                c.adicionarConta(contaInvestimento); // Adiciona a conta ao cliente
+                                c.adicionarConta(contaInvestimento);
                                 contas.add(contaInvestimento);
                                 System.out.println("Conta Investimento criada com sucesso!O código da conta: " + contaInvestimento.getNumeroDaConta());
                                 break;
@@ -210,13 +209,13 @@ public class PagueJa {
                         switch (opcaoTipoConta) {
                             case 1:
                                 Conta contaCorrente = new Conta(c, TipoDeConta.CORRENTE, tipoDeCliente);
-                                c.adicionarConta(contaCorrente); // Adiciona a conta ao cliente
+                                c.adicionarConta(contaCorrente);
                                 contas.add(contaCorrente);
                                 System.out.println("Conta Corrente criada com sucesso! O código da conta: " + contaCorrente.getNumeroDaConta());
                                 break;
                             case 2:
                                 Conta contaInvestimento = new Conta(c, TipoDeConta.INVESTIMENTO, tipoDeCliente);
-                                c.adicionarConta(contaInvestimento); // Adiciona a conta ao cliente
+                                c.adicionarConta(contaInvestimento);
                                 contas.add(contaInvestimento);
                                 System.out.println("Conta Investimento criada com sucesso! O código da conta: " + contaInvestimento.getNumeroDaConta());
                                 break;
@@ -230,11 +229,9 @@ public class PagueJa {
                 }
             }
         }
-
         if (!clienteEncontrado) {
             System.out.println("Cliente não encontrado!");
         }
-        //  exibirMenu2(scanner, clientes);
     }
 
     public static void depositar(Scanner scanner, ArrayList<Conta> contas) {
@@ -407,12 +404,9 @@ public class PagueJa {
         if (valorTransferencia.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("O valor da transferência deve ser positivo.");
         } else if (valorTransferencia.compareTo(saldoOrigem) <= 0) {
-            // Verifica se a conta de origem é Pessoa Jurídica
             TipoDeCliente tipoDeCliente = contaOrigem.getCliente().getTipoDeCliente();
             if (tipoDeCliente == TipoDeCliente.PESSOAJURIDICA) {
-                // Calcula a taxa de 0.5% sobre o valor da transferência
                 BigDecimal taxa = valorTransferencia.multiply(new BigDecimal("0.005"));
-                // Deduz a taxa do saldo da conta de origem
                 BigDecimal valorTransferidoComTaxa = valorTransferencia.add(taxa);
                 if (saldoOrigem.compareTo(valorTransferidoComTaxa) >= 0) {
                     contaOrigem.sacar(valorTransferidoComTaxa);
