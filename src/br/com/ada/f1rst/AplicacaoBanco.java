@@ -260,9 +260,14 @@ public class AplicacaoBanco {
             if (tipoDeConta == TipoDeConta.POUPANCA) {
                 System.out.print("Digite o valor a ser depositado: ");
                 BigDecimal valorDeposito = scanner.nextBigDecimal();
-                conta.depositar(valorDeposito);
-                System.out.println("Depósito realizado com sucesso!");
-                System.out.println("Novo saldo da conta: R$ " + conta.getSaldo());
+                if (valorDeposito.compareTo(BigDecimal.ZERO) <= 0) {
+                    System.out.println("O valor deve ser positivo.");
+                } else {
+                    conta.depositar(valorDeposito);
+                    System.out.println("Depósito realizado com sucesso!");
+                    System.out.println("Novo saldo da conta: R$ " + conta.getSaldo());
+                }
+
             } else {
                 System.out.println("Clientes pessoa física só podem depositar em contas poupança.");
             }
@@ -270,9 +275,13 @@ public class AplicacaoBanco {
             if (tipoDeConta == TipoDeConta.CORRENTE) {
                 System.out.print("Digite o valor a ser depositado: R$ ");
                 BigDecimal valorDeposito = scanner.nextBigDecimal();
-                conta.depositar(valorDeposito);
-                System.out.println("Depósito realizado com sucesso!");
-                System.out.println("Novo saldo da conta: R$ " + conta.getSaldo());
+                if (valorDeposito.compareTo(BigDecimal.ZERO) <= 0) {
+                    System.out.println("O valor deve ser positivo.");
+                } else {
+                    conta.depositar(valorDeposito);
+                    System.out.println("Depósito realizado com sucesso!");
+                    System.out.println("Novo saldo da conta: R$ " + conta.getSaldo());
+                }
             } else {
                 System.out.println("Clientes pessoa jurídica só podem depositar em contas corrente.");
             }
@@ -406,6 +415,10 @@ public class AplicacaoBanco {
         BigDecimal valorTransferencia = scanner.nextBigDecimal();
 
         BigDecimal saldoOrigem = contaOrigem.getSaldo();
+        if (valorTransferencia.compareTo(saldoOrigem) > 0) {
+            System.out.println("O valor da transferência é maior que o saldo da conta de origem.");
+            return;
+        }
         if (valorTransferencia.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("O valor da transferência deve ser positivo.");
         } else if (valorTransferencia.compareTo(saldoOrigem) <= 0) {
@@ -423,8 +436,8 @@ public class AplicacaoBanco {
                 } else {
                     System.out.println("Saldo insuficiente para realizar a transferência incluindo a taxa.");
                 }
-            } else {
-                if (saldoOrigem.compareTo(valorTransferencia) >= 0) {
+            } else if (tipoDeCliente == TipoDeCliente.PESSOAFISICA) {
+                if (saldoOrigem.compareTo(valorTransferencia) <= 0) {
                     contaOrigem.sacar(valorTransferencia);
                     contaDestino.depositar(valorTransferencia);
                     System.out.println("Transferência realizada com sucesso!");
@@ -467,7 +480,6 @@ public class AplicacaoBanco {
         BigDecimal novoSaldoInvestimento = conta.getSaldo().add(rendimento);
         BigDecimal novoSaldo = novoSaldoInvestimento.add(valorInvestimento);
         conta.depositar(novoSaldo);
-
         System.out.println("Investimento realizado com sucesso!");
         System.out.println("Rendimento: R$ " + rendimento);
         System.out.println("Novo saldo da conta: R$ " + novoSaldo);
@@ -476,5 +488,4 @@ public class AplicacaoBanco {
                 "                                                                                     " +
                 "         " + Cores.TEXT_RESET);
     }
-
 }

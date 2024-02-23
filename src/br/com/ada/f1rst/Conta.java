@@ -20,14 +20,6 @@ public class Conta {
         this.numeroDaConta = String.valueOf(new Random().nextInt(100));
     }
 
-    //    public void sacar(BigDecimal valor) {
-//        if (cliente.getTipo().equals("PJ")) {
-//            saldo = saldo.subtract(valor);
-//        }
-//
-//    }
-
-
     public Cliente getCliente() {
         return cliente;
     }
