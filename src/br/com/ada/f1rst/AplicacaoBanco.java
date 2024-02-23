@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class PagueJa {
+public class AplicacaoBanco {
     private static Scanner scanner = new Scanner(System.in);
     private static ArrayList<Conta> contas = new ArrayList<>();
     private static ArrayList<Cliente> clientes = new ArrayList<>();
@@ -20,8 +20,10 @@ public class PagueJa {
         do {
             System.out.println(Cores.TEXT_PURPLE_BOLD
                     + "********************************************");
-            System.out.println("*********** Bem Vindo ao JavaBank **********");
-            System.out.println("************* Menu Principal ***************");
+            System.out.println("******** Bem Vindo ao LuaBank **************");
+            System.out.println("******** O melhor banco da Lua ! ***********");
+            System.out.println("***** Porque da Terra e o Chama ************");
+            System.out.println("*********** Menu Principal *****************");
             System.out.println("********************************************");
             System.out.println("1. Já sou Cliente");
             System.out.println("2. Cadastro de Cliente");
@@ -56,7 +58,10 @@ public class PagueJa {
     }
 
     public static boolean exibirMenu2(Scanner scanner, ArrayList<Cliente> clientes) {
+
         do {
+            System.out.println(Cores.TEXT_PURPLE_BOLD
+                    + "********************************************");
             System.out.println("********************************************");
             System.out.println("*************** Menu Cliente ***************");
             System.out.println("********************************************");
@@ -447,11 +452,11 @@ public class PagueJa {
             return;
         }
 
-        System.out.print("Digite o valor do investimento: R$");
+        System.out.print("Digite o valor do investimento: R$ ");
         BigDecimal valorInvestimento = scanner.nextBigDecimal();
 
         TipoDeCliente tipoDeCliente = conta.getCliente().getTipoDeCliente();
-        BigDecimal taxaDeRendimento = new BigDecimal(0.02);
+        BigDecimal taxaDeRendimento = new BigDecimal("0.02");
 
         if (tipoDeCliente == TipoDeCliente.PESSOAJURIDICA) {
 
