@@ -18,14 +18,18 @@ public class PagueJa {
         int opcao;
 
         do {
+            System.out.println(Cores.TEXT_PURPLE_BOLD
+                    + "********************************************");
             System.out.println("*********** Bem Vindo ao JavaBank **********");
-            System.out.println("**************** Menu Principal ************");
+            System.out.println("************* Menu Principal ***************");
+            System.out.println("********************************************");
             System.out.println("1. Já sou Cliente");
             System.out.println("2. Cadastro de Cliente");
             System.out.println("3. Listar todos os Clientes");
             System.out.println("0. Sair");
-
+            System.out.println("Digite uma opção: ");
             int opcao2 = scanner.nextInt();
+
             boolean sair = false;
 
             switch (opcao2) {
@@ -54,8 +58,9 @@ public class PagueJa {
 
     public static boolean exibirMenu2(Scanner scanner, ArrayList<Cliente> clientes) {
         do {
-            System.out.println("*********** Menu Cliente **********");
-            System.out.println("***********************************");
+            System.out.println("********************************************");
+            System.out.println("*************** Menu Cliente ***************");
+            System.out.println("********************************************");
             System.out.println("1. Abrir Conta");
             System.out.println("2. Depositar");
             System.out.println("3. Sacar");
@@ -100,7 +105,9 @@ public class PagueJa {
 
     public static void cadastrarCliente(Scanner scanner, ArrayList<Cliente> clientes) {
         TipoDeCliente tipoDeCliente = null;
-        System.out.println("******* Cadastro de Cliente *******");
+        System.out.println("********************************************");
+        System.out.println("*********** Cadastro de Cliente ************");
+        System.out.println("********************************************");
         System.out.println("Digite seu nome:");
         String nome = scanner.next();
         System.out.println("Digite sua idade:");
@@ -142,13 +149,13 @@ public class PagueJa {
                 } else if (c.getTipoDeCliente().equals(TipoDeCliente.PESSOAFISICA)) {
                     tipoPessoa = "Pessoa Física";
                 }
-                System.out.println("*******************************");
+                System.out.println("********************************************");
                 System.out.println("Tipo de Cliente: " + tipoPessoa);
                 System.out.println("Codigo do Cliente: " + c.getCodigo());
                 System.out.println("Nome do Cliente: " + c.getNome());
                 System.out.println("Idade do Cliente: " + c.getIdade());
 
-                System.out.println("*******************************");
+                System.out.println("********************************************");
             }
         }
     }
@@ -169,9 +176,9 @@ public class PagueJa {
                     tipoPessoa = "Pessoa Física";
                 }
                 if (tipoDeCliente != null) {
-                    System.out.println("*******************************");
+                    System.out.println("********************************************");
                     System.out.println("Tipo de Cliente: " + tipoPessoa);
-                    System.out.println("*******************************");
+                    System.out.println("********************************************");
                     int opcaoTipoConta;
                     if (tipoDeCliente == TipoDeCliente.PESSOAFISICA) {
                         System.out.println("Escolha uma opção: ");
@@ -338,7 +345,7 @@ public class PagueJa {
             for (Cliente cliente : clientes) {
                 if (cliente.getCodigo().equals(codigoCliente)) {
                     clienteEncontrado = true;
-                    System.out.println("*******************************");
+                    System.out.println("********************************************");
                     System.out.println("Contas do cliente: " + cliente.getNome());
                     System.out.println("Cliente do tipo: " + cliente.getTipoDeCliente());
                     List<Conta> contasCliente = cliente.getContas();
@@ -347,11 +354,12 @@ public class PagueJa {
                         System.out.println("O cliente não possui contas.");
                     } else {
                         for (Conta conta : contasCliente) {
-                            System.out.println("*******************************");
+                            System.out.println("********************************************");
                             System.out.println("Tipo de Conta: " + conta.getTipoDeConta());
                             System.out.println("Agência: " + conta.getAgencia());
                             System.out.println("Número da Conta: " + conta.getNumeroDaConta());
                             System.out.println("Saldo: R$ " + conta.getSaldo());
+                            System.out.println("********************************************");
                         }
                     }
                 }
@@ -464,5 +472,10 @@ public class PagueJa {
         System.out.println("Investimento realizado com sucesso!");
         System.out.println("Rendimento: R$ " + rendimento);
         System.out.println("Novo saldo da conta: R$ " + novoSaldo);
+        System.out.println("                                                           " +
+                "                                                                    " +
+                "                                                                                     " +
+                "         " + Cores.TEXT_RESET);
     }
+
 }

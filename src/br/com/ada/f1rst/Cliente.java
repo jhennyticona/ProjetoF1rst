@@ -41,8 +41,9 @@ public class Cliente {
     public String getNome() {
         return nome;
     }
-    
+
     public int getIdade() {
+
         return idade;
     }
 
