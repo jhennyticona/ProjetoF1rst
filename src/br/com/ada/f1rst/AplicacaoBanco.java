@@ -419,7 +419,7 @@ public class AplicacaoBanco {
             if (tipoDeCliente == TipoDeCliente.PESSOAJURIDICA) {
                 BigDecimal taxa = valorTransferencia.multiply(new BigDecimal("0.005"));
                 BigDecimal valorTransferidoComTaxa = valorTransferencia.add(taxa);
-                if (saldoOrigem.compareTo(valorTransferidoComTaxa) >= 0) {
+                if (saldoOrigem.compareTo(valorTransferidoComTaxa) <= 0) {
                     contaOrigem.sacar(valorTransferidoComTaxa);
                     contaDestino.depositar(valorTransferencia);
                     System.out.println("Transferência realizada com sucesso!");
