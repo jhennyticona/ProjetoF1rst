@@ -22,7 +22,7 @@ public class AplicacaoBanco {
                     + "********************************************");
             System.out.println("******** Bem Vindo ao LuaBank **************");
             System.out.println("******** O melhor banco da Lua ! ***********");
-            System.out.println("***** Porque da Terra e o Chama ************");
+            System.out.println("***** Porque da Terra é o Chama ************");
             System.out.println("*********** Menu Principal *****************");
             System.out.println("********************************************");
             System.out.println("1. Já sou Cliente");
@@ -382,7 +382,7 @@ public class AplicacaoBanco {
         }
     }
 
-    public static void transferencia(Scanner scanner, ArrayList<Conta> contas) {
+    static void transferencia(Scanner scanner, ArrayList<Conta> contas) {
         System.out.print("Digite o número da conta de origem: ");
         String numeroContaOrigem = scanner.next();
         Conta contaOrigem = null;
@@ -396,7 +396,6 @@ public class AplicacaoBanco {
             System.out.println("Conta de origem não encontrada.");
             return;
         }
-
         System.out.print("Digite o número da conta de destino: ");
         String numeroContaDestino = scanner.next();
         Conta contaDestino = null;
@@ -410,15 +409,9 @@ public class AplicacaoBanco {
             System.out.println("Conta de destino não encontrada.");
             return;
         }
-
         System.out.print("Digite o valor a ser transferido: R$ ");
         BigDecimal valorTransferencia = scanner.nextBigDecimal();
-
         BigDecimal saldoOrigem = contaOrigem.getSaldo();
-        if (valorTransferencia.compareTo(saldoOrigem) > 0) {
-            System.out.println("O valor da transferência é maior que o saldo da conta de origem.");
-            return;
-        }
         if (valorTransferencia.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("O valor da transferência deve ser positivo.");
         } else if (valorTransferencia.compareTo(saldoOrigem) <= 0) {
@@ -436,8 +429,8 @@ public class AplicacaoBanco {
                 } else {
                     System.out.println("Saldo insuficiente para realizar a transferência incluindo a taxa.");
                 }
-            } else if (tipoDeCliente == TipoDeCliente.PESSOAFISICA) {
-                if (saldoOrigem.compareTo(valorTransferencia) <= 0) {
+            } else {
+                if (saldoOrigem.compareTo(valorTransferencia) >= 0) {
                     contaOrigem.sacar(valorTransferencia);
                     contaDestino.depositar(valorTransferencia);
                     System.out.println("Transferência realizada com sucesso!");
@@ -449,6 +442,7 @@ public class AplicacaoBanco {
             }
         }
     }
+
 
     public static void investir(Scanner scanner, ArrayList<Conta> contas) {
         System.out.print("Digite o número da conta para investimento: ");
